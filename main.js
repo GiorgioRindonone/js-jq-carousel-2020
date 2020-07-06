@@ -34,7 +34,7 @@ $(document).ready(function() {
     var imgActive = $('.slider-wrapper img.active');
     imgActive.removeClass('active');
 
-    
+
     var iActive = $('.slider-wrapper i.active');
     iActive.removeClass('active');
 
@@ -47,5 +47,27 @@ $(document).ready(function() {
       iActive.prev().addClass('active');
     }
   });
+
+  //clicco sul pallino
+  //devo far corrispondere il pallino all'immagine
+  //trovo l'indice del pallino sul quale clicco e lo uso per trovare anche l'immagine
+  $('.nav > i').click(function()  {
+    //!!quando facciamo una selezione di una classe del DOM lui cercherà in tutto il documento a differenza della selezione con ID
+    //mi seleziono tutte le i figlie di .nav e al click assegno una funzione
+    $('.nav > i').removeClass('active');
+    //vado a togliere la classe agli elementi i figli di .nav che hanno attualmente la classe .active
+    $(this).addClass('active');
+    //vado ad assegnare all'elemento attivo (this) su cui è stato eseguito il click la classe .active
+
+    var thisIndex = $(this).index();
+    //usiamo la funzione jquery .index per farci ridare un valore di indice dell'elemento selezionato
+
+    //!!devo togliere l'active attivo e metterla nell'elemento selezionato
+    $('img.active').removeClass('active');
+    //togli da qualsiasi elemento img con classe .active la classe .active
+    $('img').eq(thisIndex).addClass('active');
+    //vammi a prendere l'immagine che corrisponde all'indice dell'elemento selezionato (in questo caso i) e aggiungigli la classe .active
+  });
+
 
 });
